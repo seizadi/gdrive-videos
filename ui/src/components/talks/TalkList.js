@@ -12,22 +12,24 @@ class TalkList extends React.Component {
 
   renderList() {
     return this.props.talks.map( (talk) => {
-      return (
-        <div className="item" key={ talk.id } >
-          <i className="large middle aligned icon camera" />
-          <div className="content">
-            <Link to={`/talks/show/${talk.id}`}
-                  className={'header'}
-            >
-              { talk.Topic }
-            </Link>
-            <div className="description">
-              <h5>{talk.Presenter}</h5>
-              { talk.Description }
+      if (talk.show) {
+        return (
+          <div className="item" key={talk.id}>
+            <i className="large middle aligned icon video"/>
+            <div className="content">
+              <Link to={`/talks/show/${talk.id}`}
+                    className={'header'}
+              >
+                {talk.Topic}
+              </Link>
+              <div className="description">
+                <h5>{talk.Presenter}</h5>
+                {talk.Description}
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     });
   }
 

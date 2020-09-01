@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
+import { searchTalks } from "../../actions";
 
 const TalkSearch =  (props) => {
   const [term, setTerm] = useState('');
@@ -16,9 +18,7 @@ const TalkSearch =  (props) => {
   }, [term]);
 
   useEffect( () => {
-    if (debouncedTerm) {
-      console.log('Do search now on: ', debouncedTerm);
-    }
+    props.searchTalks(debouncedTerm)
   }, [debouncedTerm]);
 
   return (
@@ -37,4 +37,4 @@ const TalkSearch =  (props) => {
   );
 }
 
-export default TalkSearch;
+export default connect(null, { searchTalks })(TalkSearch);

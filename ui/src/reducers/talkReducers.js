@@ -1,4 +1,4 @@
-import { LIST_TALKS, GET_TALK } from "../actions/types";
+import { LIST_TALKS, GET_TALK, SEARCH_TALKS } from "../actions/types";
 
 const INITIAL_STATE = {}
 
@@ -9,12 +9,29 @@ export default  (state = INITIAL_STATE, action) => {
       return { ...state, [action.payload.id]: action.payload };
 
     case LIST_TALKS:
-      let newState = {};
+      let listState = {};
       action.payload.forEach((talk) => {
         talk.show = true;
-        newState = { ...newState, [talk.id]: talk }
+        listState = { ...listState, [talk.id]: talk }
       });
-      return newState;
+      return listState;
+    case SEARCH_TALKS:
+      let searchState = {};
+      const term = action.payload.toLowerCase();
+      Object.values(state).forEach((talk) => {
+        if( term ) {
+          talk.show = false;
+          if (talk.SearchTerms.toLowerCase().includes(term) ||
+            talk.Description.toLowerCase().includes(term) ||
+            talk.Presenter.toLowerCase().includes(term)) {
+            talk.show = true;
+          }
+        } else {
+          talk.show = true;
+        }
+        searchState = { ...searchState, [talk.id]: talk }
+      });
+      return searchState;
     default:
       return state;
   }
