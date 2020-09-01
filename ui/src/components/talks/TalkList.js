@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { listTalks } from "../../actions";
+import TalkSearch from "./TalkSearch";
 
 class TalkList extends React.Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ class TalkList extends React.Component {
     return(
       <div>
         <h2>Talks</h2>
+        <TalkSearch />
         <div className="ui celled list">
           { this.renderList() }
         </div>
