@@ -1,5 +1,5 @@
-import streams from "../api/streams";
-import { SIGN_IN, SIGN_OUT, LIST_STREAMS, GET_STREAM } from "./types";
+import talks from "../api/talks";
+import { SIGN_IN, SIGN_OUT, LIST_TALKS, GET_TALK } from "./types";
 
 export const signIn = (userId, name, email, jwt) => {
   return ({
@@ -25,12 +25,12 @@ export const signOut = () => {
   });
 }
 
-export const listStreams = () => async dispatch => {
-  const response = await streams.get('/streams');
-  dispatch({type: LIST_STREAMS, payload: response.data});
+export const listTalks = () => async dispatch => {
+  const response = await talks.get('/talks');
+  dispatch({type: LIST_TALKS, payload: response.data});
 }
-export const getStream = (id) => async dispatch => {
-  const response = await streams.get(`/streams/${id}`);
-  dispatch({type: GET_STREAM, payload: response.data });
+export const getTalk = (id) => async dispatch => {
+  const response = await talks.get(`/talks/${id}`);
+  dispatch({type: GET_TALK, payload: response.data });
 }
 

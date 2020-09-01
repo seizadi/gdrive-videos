@@ -2,27 +2,27 @@ import React from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { listStreams } from "../../actions";
+import { listTalks } from "../../actions";
 
-class StreamList extends React.Component {
+class TalkList extends React.Component {
   componentDidMount() {
-    this.props.listStreams();
+    this.props.listTalks();
   }
 
   renderList() {
-    return this.props.streams.map( (stream) => {
+    return this.props.talks.map( (talk) => {
       return (
-        <div className="item" key={ stream.id } >
+        <div className="item" key={ talk.id } >
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/show/${stream.id}`}
+            <Link to={`/talks/show/${talk.id}`}
                   className={'header'}
             >
-              { stream.Topic }
+              { talk.Topic }
             </Link>
             <div className="description">
-              <h5>{stream.Presenter}</h5>
-              { stream.Description }
+              <h5>{talk.Presenter}</h5>
+              { talk.Description }
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@ class StreamList extends React.Component {
   render() {
     return(
       <div>
-        <h2>Streams</h2>
+        <h2>Talks</h2>
         <div className="ui celled list">
           { this.renderList() }
         </div>
@@ -47,8 +47,8 @@ const mapStateToProps = state => {
   return {
     signedIn: state.auth.signedIn,
     currentUserId: state.auth.userId,
-    streams: Object.values(state.streams)
+    talks: Object.values(state.talks)
   };
 };
 
-export default connect(mapStateToProps, { listStreams })(StreamList);
+export default connect(mapStateToProps, { listTalks })(TalkList);

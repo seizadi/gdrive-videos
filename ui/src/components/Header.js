@@ -7,7 +7,7 @@ const Header = () => {
     <div className={'ui secondary pointing menu'}>
       <Link to={'/'} className={'item'}>TAD Talks</Link>
       <div className={'right menu'}>
-        <Link to={'/'} className={'item'}>All Streams</Link>
+        <Link to={'/'} className={'item'}>All Talks</Link>
         <GoogleAuth />
       </div>
     </div>

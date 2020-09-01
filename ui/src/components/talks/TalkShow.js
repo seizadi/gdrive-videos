@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from 'react-redux';
 
-import { getStream } from "../../actions";
+import { getTalk } from "../../actions";
 import Loading from "../Loading";
 
-class StreamShow extends React.Component {
+class TalkShow extends React.Component {
 
   componentDidMount() {
-    this.props.getStream( this.props.match.params.id );
+    this.props.getTalk( this.props.match.params.id );
   }
 
   renderRecording() {
-    const recording = this.props.stream.Recording;
+    const recording = this.props.talk.Recording;
     if (recording) {
       return(
         <div className={'ui embed'}>
@@ -22,7 +22,7 @@ class StreamShow extends React.Component {
   }
 
   render() {
-    if ( !this.props.stream ) {
+    if ( !this.props.talk ) {
       return (
         <div className="ui container">
           <Loading show={true} message={'Loading'} />
@@ -30,7 +30,7 @@ class StreamShow extends React.Component {
       );
     }
 
-    const talk = this.props.stream;
+    const talk = this.props.talk;
     return(
       <div>
         {this.renderRecording()}
@@ -43,7 +43,7 @@ class StreamShow extends React.Component {
 }
 
 const mapStateToProps = ( state, ownProps ) => {
-  return { stream: state.streams[ ownProps.match.params.id ]};
+  return { talk: state.talks[ ownProps.match.params.id ]};
 }
 
-export default connect(mapStateToProps, { getStream })(StreamShow);
+export default connect(mapStateToProps, { getTalk })(TalkShow);
